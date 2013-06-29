@@ -1,0 +1,13 @@
+# Append on words.
+#   trigger:
+#   - some
+#   - words
+trigger:
+
+reminder:
+  # Set this to true to enable ticket reminders.
+  enable: false
+  
+  # Interval is set to 10min by default.
+  # There are 20ticks per sec, do the math or use a calculator.
+  interval: 12000

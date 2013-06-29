@@ -1,0 +1,45 @@
+name: BigBadCraft
+main: me.bigbadhenz.bigbadcraft.ticket.Main
+version: 1.5
+website: www.bigbadcraft.net
+commands:
+  fakeop:
+    description: Trolol.
+    permission: bigbadcraft.fakeop
+  id:
+    description: Returns item id in hand.
+    permission: bigbadcraft.id
+    permission-message: §cYou do not have <permission>
+    default: op
+  work:
+    description: Opens a workbench at current location.
+    permission: bigbadcraft.workbench
+    permission-message: §cYou do not have <permission>
+    default: op
+  coal:
+    description: Spawns coal pstone ore.
+    permission: bigbadcraft.pstone
+    permission-message: §cYou do not have <permission>
+    default: op
+  lapis:
+    description: Spawns lapis pstone ore.
+    permission: bigbadcraft.pstone
+    permission-message: §cYou do not have <permission>
+    default: op
+  diamond:
+    description: Spawns diamond pstone ore.
+    permission: bigbadcraft.pstone
+    permission-message: §cYou do not have <permission>
+    default: op
+  redstone:
+    description: Spawns redstone pstone ore.
+    permission: bigbadcraft.pstone
+    permission-message: §cYou do not have <permission>
+    default: op
+  helpop:
+    description: Submits a ticket.
+  ticket:
+    description: A list of commands.
+    permission: staffticket.mod
+    permission-message: §cYou do not have <permission>
+    default: op
