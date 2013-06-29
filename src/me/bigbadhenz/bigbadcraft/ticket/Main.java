@@ -1,10 +1,13 @@
 
 package me.bigbadhenz.bigbadcraft.ticket;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import me.bigbadhenz.bigbadcraft.accalias.AccountCommands;
+import me.bigbadhenz.bigbadcraft.accalias.AccountListener;
 import me.bigbadhenz.bigbadcraft.other.BuildSpectate;
 import me.bigbadhenz.bigbadcraft.other.Health;
 import me.bigbadhenz.bigbadcraft.other.OtherCommands;
@@ -24,6 +27,7 @@ public class Main extends JavaPlugin implements Listener {
 	public static List<String> helpopTickets = new ArrayList<String>();
 	
 	int ticketCounter;
+	public File file = new File(getDataFolder(), "playerinfo.yml"); 
 	
 	private TicketListener ticketListener = new TicketListener(this);
 	private TicketScheduler ticketScheduler = new TicketScheduler(this);
@@ -32,6 +36,9 @@ public class Main extends JavaPlugin implements Listener {
 	private Health health = new Health();
 	private SilkTouchDisabler silktouchDisabler = new SilkTouchDisabler();
 	private PreventPoisonDamage preventPoison = new PreventPoisonDamage();
+	private AccountListener accountListener = new AccountListener(this);
+	@SuppressWarnings("unused")
+	private AccountCommands accountCommands = new AccountCommands();
 	private OtherCommands otherCommands = new OtherCommands();
 	
 	public void onEnable() {
@@ -42,6 +49,7 @@ public class Main extends JavaPlugin implements Listener {
 		pm.registerEvents(silktouchDisabler, this);
 		pm.registerEvents(preventPoison, this);
 		pm.registerEvents(ticketListener, this);
+		pm.registerEvents(accountListener, this);
 		pm.registerEvents(new BuildSpectate(), this);
 		
 		getCommand("helpop").setExecutor(commands);
