@@ -28,11 +28,11 @@ public class Main extends JavaPlugin implements Listener {
 	private TicketListener ticketListener = new TicketListener(this);
 	private TicketScheduler ticketScheduler = new TicketScheduler(this);
 	private Commands commands = new Commands(this, this);
-	private OtherCommands otherCommands = new OtherCommands();
 	
 	private Health health = new Health();
 	private SilkTouchDisabler silktouchDisabler = new SilkTouchDisabler();
 	private PreventPoisonDamage preventPoison = new PreventPoisonDamage();
+	private OtherCommands otherCommands = new OtherCommands();
 	
 	public void onEnable() {
 		
@@ -66,11 +66,9 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
 	public void updateConfig() {
-		
 		getConfig();
 		saveDefaultConfig();
 		reloadConfig();
-		
 	}
 	
 	public void onDisable() {}

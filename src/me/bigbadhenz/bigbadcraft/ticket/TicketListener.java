@@ -10,18 +10,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class TicketListener implements Listener {
 	
 	private Main plugin;
-	
 	public TicketListener(Main plugin) {
 		this.plugin = plugin;
 	}
 	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		
 		String playerName = event.getPlayer().getName();
 		String playerMessage = ": " + event.getMessage();
 		Player p = Bukkit.getPlayer(playerName);
-		
 		for (String s : plugin.getConfig().getStringList("trigger")) {
 			if (event.getMessage().contains(s)) {
 				if (!Main.playerTicket.containsKey(playerName) && !event.getPlayer().hasPermission("staffticket.mod")) {
@@ -46,7 +43,6 @@ public class TicketListener implements Listener {
 				Main.playerTicket.put(p.getName(), playerMessage);
 			}
 		}
-		
 	}
 	
 	@EventHandler

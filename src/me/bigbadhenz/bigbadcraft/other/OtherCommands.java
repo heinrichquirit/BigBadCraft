@@ -16,7 +16,6 @@ public class OtherCommands implements CommandExecutor {
 			cs.sendMessage(ChatColor.RED + "Please use this command in game.");
 			return true;
 		}
-		
 		Player p = (Player) cs;
 		
 		if(cmd.getName().equalsIgnoreCase("fakeop")) {
@@ -27,36 +26,30 @@ public class OtherCommands implements CommandExecutor {
 				target.sendMessage(ChatColor.YELLOW + "You have been opped.");
 			}
 		}
-		
 		if(cmd.getName().equalsIgnoreCase("work")) {
 			p.openWorkbench(p.getLocation(), true);
 		}
-		
 		if(cmd.getName().equalsIgnoreCase("id")) {
 			cs.sendMessage(ChatColor.YELLOW + "Item ID: " + p.getItemInHand().getTypeId());
 		}
-		
 		if(cmd.getName().equals("coal")) {
 			ItemStack coal = new ItemStack(Material.COAL_ORE);
 			p.getInventory().addItem(coal);
 			cs.sendMessage(ChatColor.GREEN + "Spawned a " + ChatColor.BLACK + "coal" + ChatColor.GREEN + " pstone." +
 					" Please use this only at users request for bugged pstones!");
 		}
-		
 		if(cmd.getName().equals("lapis")) {
 			ItemStack lapis = new ItemStack(Material.LAPIS_ORE);
 			p.getInventory().addItem(lapis);
 			cs.sendMessage(ChatColor.GREEN + "Spawned a " + ChatColor.BLUE + "lapis" + ChatColor.GREEN + " pstone." +
 					" Please use this only at users request for bugged pstones!");
 		}
-		
 		if(cmd.getName().equals("diamond")) {
 			ItemStack diamond = new ItemStack(Material.DIAMOND_ORE);
 			p.getInventory().addItem(diamond);
 			cs.sendMessage(ChatColor.GREEN + "Spawned a " + ChatColor.AQUA + "diamond" + ChatColor.GREEN + " pstone." +
 					" Please use this only at users request for bugged pstones!");
 		}
-		
 		if(cmd.getName().equals("redstone")) {
 			ItemStack redstone = new ItemStack(Material.REDSTONE_ORE);
 			p.getInventory().addItem(redstone);

@@ -9,7 +9,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class TicketScheduler extends BukkitRunnable {
 	
 	private Main plugin;
-	
 	public TicketScheduler(Main plugin) {
 		this.plugin = plugin;
 	}

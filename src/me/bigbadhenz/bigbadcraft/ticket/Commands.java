@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 public class Commands implements CommandExecutor {
 	
 	private Main plugin;
-	
 	public Commands(Main plugin, Main main) {
 		this.plugin = plugin;
 	}
@@ -24,7 +23,6 @@ public class Commands implements CommandExecutor {
 			cs.sendMessage("Please use this command in game.");
 			return true;
 		}
-		
 		Player player = (Player) cs;
 		String playerName = player.getName();
 		
@@ -45,7 +43,6 @@ public class Commands implements CommandExecutor {
 				cs.sendMessage("§aYou have submitted ticket. Queue Position: " + "§f" + plugin.ticketCounter);
 			}
 		}
-		
 		if(cmd.getName().equalsIgnoreCase("ticket")) {
 			if(args.length == 0) {
 				StringBuilder sb = new StringBuilder();
@@ -59,9 +56,7 @@ public class Commands implements CommandExecutor {
 				cs.sendMessage(sb.toString());
 				return true;
 			}
-			
 			if(args.length == 1) {
-				
 				if(args[0].equalsIgnoreCase("tp")) {
 					cs.sendMessage("§aBigBadCraft§f - Please use '/ticket tp <player>'");
 				}
@@ -74,12 +69,10 @@ public class Commands implements CommandExecutor {
 				if(args[0].equalsIgnoreCase("view")) {
 					cs.sendMessage("§aBigBadCraft§f - Please use '/ticket view <player>'");
 				}
-				
 				if(args[0].equalsIgnoreCase("list")) {
 	                if(Main.playerTicket.isEmpty() && Main.helpopNames.isEmpty()) {
 	                    cs.sendMessage("§aBigBadCraft§f - There are no tickets available.");
-	                } 
-	                else {
+	                } else {
 	                    cs.sendMessage("--- §aAvailable Tickets: §f(" + plugin.ticketCounter + ") ---");
 	                    for(Entry<String, String> entry : Main.playerTicket.entrySet()) {
 	                    	cs.sendMessage("§a" + entry.getKey() + "§f" + entry.getValue());
@@ -90,21 +83,17 @@ public class Commands implements CommandExecutor {
 	                }
 	                return true;
 	            }
-				
 				if (args[0].equalsIgnoreCase("clear") && !Main.playerTicket.isEmpty()) {
 					Main.playerTicket.clear();
 					Main.helpopNames.clear();
 					Main.helpopTickets.clear();
 					plugin.ticketCounter = 0;
 					cs.sendMessage("§aBigBadCraft§f - All tickets cleared.");
-				} 
-				else if(args[0].equalsIgnoreCase("clear") && Main.playerTicket.isEmpty()) {
+				} else if(args[0].equalsIgnoreCase("clear") && Main.playerTicket.isEmpty()) {
 					cs.sendMessage("§aBigBadCraft§f - There is nothing to clear.");
 				}
 			}
-		
 			if(args.length == 2) {
-				
 				Player p;
 				
 				try {
@@ -112,7 +101,6 @@ public class Commands implements CommandExecutor {
 					
 					boolean ifHelpopNames = Main.helpopNames.containsKey(playerName);
 					
-					//Check to see if playerTicket contains playname
 					if(args[0].equalsIgnoreCase("cl") && p.isOnline() && ifHelpopNames) {
 						Main.playerTicket.remove(p.getName());
 						Main.helpopNames.remove(p.getName());
@@ -128,10 +116,9 @@ public class Commands implements CommandExecutor {
 						cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
 					}
 				}
-			
-				
 				try {
 					p = Bukkit.getPlayer(args[1]);
+					
 					if(args[0].equalsIgnoreCase("tp") && p.isOnline() && Main.playerTicket.containsKey(p.getName())) {
 						Main.playerTicket.remove(p.getName());
 						if(plugin.ticketCounter > 0) {
@@ -144,9 +131,9 @@ public class Commands implements CommandExecutor {
 				} catch(NullPointerException ex) {
 					cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
 				}
-				
 				try {
 					p = Bukkit.getPlayer(args[1]);
+					
 					if(args[0].equalsIgnoreCase("del") && p.isOnline() && Main.playerTicket.containsKey(p.getName())) {
 						Main.playerTicket.remove(p.getName());
 						if(plugin.ticketCounter > 0) {
@@ -157,9 +144,9 @@ public class Commands implements CommandExecutor {
 				} catch(NullPointerException ex) {
 					cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
 				}
-				
 				try {
 					p = Bukkit.getPlayer(args[1]);
+					
 					if(args[0].equalsIgnoreCase("view") && p.isOnline()) {
 						cs.sendMessage("--- §aViewing " + playerName + "'s ticket §f---");
 						for(String messages : Main.helpopTickets) {
