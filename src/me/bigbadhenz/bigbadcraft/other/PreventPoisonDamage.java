@@ -8,13 +8,17 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class PreventPoisonDamage implements Listener {
-	
+public class PreventPoisonDamage implements Listener 
+{
 	@EventHandler
-	public void onPotionSplashEvent(PotionSplashEvent event) {
-		for(PotionEffect effect : event.getPotion().getEffects()) {
-			for(LivingEntity entity : event.getAffectedEntities()) {
-				if(effect.getType().equals(PotionEffectType.POISON) && entity instanceof Player) {
+	public void onPotionSplashEvent(PotionSplashEvent event) 
+	{
+		for(PotionEffect effect : event.getPotion().getEffects()) 
+		{
+			for(LivingEntity entity : event.getAffectedEntities()) 
+			{
+				if(effect.getType().equals(PotionEffectType.POISON) && entity instanceof Player) 
+				{
 					continue;
 				}
 				entity.addPotionEffect(effect);

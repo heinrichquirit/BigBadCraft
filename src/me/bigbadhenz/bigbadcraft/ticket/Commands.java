@@ -1,11 +1,11 @@
-
 package me.bigbadhenz.bigbadcraft.ticket;
 
+import java.io.FileNotFoundException;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,154 +13,202 @@ import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
 	
-	private Main plugin;
-	public Commands(Main plugin, Main main) {
+	private String pluginName;
+	private String pluginVersion;
+	
+	protected Main plugin;
+	public Commands(Main plugin) {
 		this.plugin = plugin;
+		
+		this.pluginName = plugin.getDescription().getName();
+		this.pluginVersion = plugin.getDescription().getVersion();
 	}
 	
-	public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
-		if(cs instanceof Player == false) {
-			cs.sendMessage("Please use this command in game.");
+	public boolean onCommand(CommandSender sender, Command cmd, String lbl, String[] args) {
+		
+		if (sender instanceof Player == false) {
+			sender.sendMessage("Please use this command in game.");
 			return true;
 		}
-		Player player = (Player) cs;
-		String playerName = player.getName();
 		
-		if(cmd.getName().equalsIgnoreCase("helpop")) {
-			if(args.length == 0) {
-				cs.sendMessage("§aBigBadCraft §f- Please use '/helpop <message>'");
-			}
-			if(args.length > 0) {
-				String message = StringUtils.join(args, ' ', 0, args.length);
-				plugin.ticketCounter++;
-				for(Player p: Bukkit.getOnlinePlayers()) {
-					if(p.hasPermission("staffticket.mod")) {
-						p.sendMessage("§4" + playerName + ": " + message);
-					}
-				}
-				Main.helpopNames.put(playerName, " - View this players ticket.");
-				Main.helpopTickets.add(message + "\n");
-				cs.sendMessage("§aYou have submitted ticket. Queue Position: " + "§f" + plugin.ticketCounter);
-			}
+		if (cmd.getName().equalsIgnoreCase("helpop")) {
+			return helpop(sender, args);
 		}
-		if(cmd.getName().equalsIgnoreCase("ticket")) {
-			if(args.length == 0) {
-				StringBuilder sb = new StringBuilder();
-				sb.append("--- §aTicket Info§f ---\n")
-				.append("§a/ticket list: §fA lists of all open tickets.\n")
-				.append("§a/ticket tp <player>: §fClaims and teleports specified ticket.\n")
-				.append("§a/ticket cl <player>: §fClaims specified ticket.\n")	
-				.append("§a/ticket del <player>: §fDeletes specified ticket.\n")
-				.append("§a/ticket view <player>: §fViews specified ticket.\n")
-				.append("§a/ticket clear: §fClears all tickets.");
-				cs.sendMessage(sb.toString());
-				return true;
-			}
-			if(args.length == 1) {
-				if(args[0].equalsIgnoreCase("tp")) {
-					cs.sendMessage("§aBigBadCraft§f - Please use '/ticket tp <player>'");
-				}
-				if(args[0].equalsIgnoreCase("cl")) {
-					cs.sendMessage("§aBigBadCraft§f - Please use '/ticket cl <player>'");
-				}
-				if(args[0].equalsIgnoreCase("del")) {
-					cs.sendMessage("§aBigBadCraft§f - Please use '/ticket del <player>'");
-				}
-				if(args[0].equalsIgnoreCase("view")) {
-					cs.sendMessage("§aBigBadCraft§f - Please use '/ticket view <player>'");
-				}
-				if(args[0].equalsIgnoreCase("list")) {
-	                if(Main.playerTicket.isEmpty() && Main.helpopNames.isEmpty()) {
-	                    cs.sendMessage("§aBigBadCraft§f - There are no tickets available.");
-	                } else {
-	                    cs.sendMessage("--- §aAvailable Tickets: §f(" + plugin.ticketCounter + ") ---");
-	                    for(Entry<String, String> entry : Main.playerTicket.entrySet()) {
-	                    	cs.sendMessage("§a" + entry.getKey() + "§f" + entry.getValue());
-	                    }
-	                    for(Entry<String, String> entry2 : Main.helpopNames.entrySet()) {
-	                    	cs.sendMessage("§a" + entry2.getKey() + "§f" + entry2.getValue());
-	                    }
-	                }
-	                return true;
-	            }
-				if (args[0].equalsIgnoreCase("clear") && !Main.playerTicket.isEmpty()) {
-					Main.playerTicket.clear();
-					Main.helpopNames.clear();
-					Main.helpopTickets.clear();
-					plugin.ticketCounter = 0;
-					cs.sendMessage("§aBigBadCraft§f - All tickets cleared.");
-				} else if(args[0].equalsIgnoreCase("clear") && Main.playerTicket.isEmpty()) {
-					cs.sendMessage("§aBigBadCraft§f - There is nothing to clear.");
-				}
-			}
-			if(args.length == 2) {
-				Player p;
-				
-				try {
-					p = Bukkit.getPlayer(args[1]);
-					
-					boolean ifHelpopNames = Main.helpopNames.containsKey(playerName);
-					
-					if(args[0].equalsIgnoreCase("cl") && p.isOnline() && ifHelpopNames) {
-						Main.playerTicket.remove(p.getName());
-						Main.helpopNames.remove(p.getName());
-						Main.helpopTickets.remove(p.getName());
-						if(plugin.ticketCounter > 0) {
-							plugin.ticketCounter--;
-						}
-						cs.sendMessage("§a" + p.getName() + "'s §fticket claimed.");
-					}
-				} catch (NullPointerException ex) {
-					p = Bukkit.getPlayer(args[1]);
-					if(!Main.playerTicket.containsKey(p.getName())) {
-						cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
-					}
-				}
-				try {
-					p = Bukkit.getPlayer(args[1]);
-					
-					if(args[0].equalsIgnoreCase("tp") && p.isOnline() && Main.playerTicket.containsKey(p.getName())) {
-						Main.playerTicket.remove(p.getName());
-						if(plugin.ticketCounter > 0) {
-							plugin.ticketCounter--;
-						}
-						Location loc = Bukkit.getPlayer(p.getName()).getLocation();
-						player.teleport(loc);
-						cs.sendMessage("Teleporting to §a" + p.getName() + "§f...");
-					}
-				} catch(NullPointerException ex) {
-					cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
-				}
-				try {
-					p = Bukkit.getPlayer(args[1]);
-					
-					if(args[0].equalsIgnoreCase("del") && p.isOnline() && Main.playerTicket.containsKey(p.getName())) {
-						Main.playerTicket.remove(p.getName());
-						if(plugin.ticketCounter > 0) {
-							plugin.ticketCounter--;
-						}
-						cs.sendMessage("§a" + p.getName() + "'s §fticket removed.");
-					}
-				} catch(NullPointerException ex) {
-					cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
-				}
-				try {
-					p = Bukkit.getPlayer(args[1]);
-					
-					if(args[0].equalsIgnoreCase("view") && p.isOnline()) {
-						cs.sendMessage("--- §aViewing " + playerName + "'s ticket §f---");
-						for(String messages : Main.helpopTickets) {
-							cs.sendMessage("§a" + playerName + "§f: " + messages);
-						}
-						if(Main.helpopTickets.isEmpty()) {
-							cs.sendMessage("§aBigBadCraft§f - " + playerName + " has no tickets.");
-						}
-					} 
-				} catch(NullPointerException ex) {
-					cs.sendMessage("§4" + "Error: " + args[1] + " is not online or in queue!");
-				}
-			}
+		
+		if (cmd.getName().equalsIgnoreCase("ticket")) {
+			return ticket(sender, args);
 		}
+		
 		return true;
+	}
+	
+	private boolean helpop(CommandSender sender, String[] args) {
+		
+		if (args.length == 0) {
+			sender.sendMessage("§cIncorrect syntax, usage: /helpop <msg>");
+			return true;
+		}
+		
+		// Store player's helpop ticket
+		if (args.length > 0) {
+			
+			String message = StringUtils.join(args, ' ', 0, args.length);
+			String helpopSender = sender.getName();
+			
+			if (!TicketListener.playerTicket.containsKey(helpopSender)) { 
+				
+				Player player = (Player) sender;
+				
+				Bukkit.broadcast("§c" + helpopSender + ": " + message, Permission.PERMISSION);
+				TicketListener.playerTicket.put(helpopSender, message);
+				
+				int x = (int) Math.round(player.getLocation().getX());
+				int y = (int) Math.round(player.getLocation().getY());
+				int z = (int) Math.round(player.getLocation().getZ());
+				
+				DataStorage.logData(helpopSender, message, x, y, z);
+				sender.sendMessage("§9Successfully submitted ticket, current position§f: " + TicketListener.playerTicket.size()); 
+			} else {
+				sender.sendMessage("§9You already have an existing ticket, current position§f: " + TicketListener.playerTicket.size());
+			}
+			
+		}
+		
+		return true;
+	}
+	
+	private boolean ticket(CommandSender sender, String[] args) {
+		
+		if (args.length == 0) {
+			initCommandList(sender);
+		}
+		
+		else if (args.length == 1) {
+			
+			switch(args[0]) {
+			case "readfile":
+				try {
+					@SuppressWarnings("resource")
+					Scanner in = new Scanner(Main.fileLog);
+					
+					if (!in.hasNextLine()) { 
+						sender.sendMessage("§cNo data was found in the file."); 
+					} else {
+						sender.sendMessage("§9Fetching file for you...");
+						
+						while (in.hasNextLine()) {
+							sender.sendMessage(in.nextLine());
+						}	
+					}
+					
+				} catch (FileNotFoundException ex) {
+					Main.logger.severe(Main.fileLog.getName() + " could not be found!");
+					ex.printStackTrace();
+				}
+				break;
+			case "list":
+				if (!TicketListener.playerTicket.isEmpty()) {
+					sender.sendMessage("§9+-------- [ §f" + pluginName + " (" + TicketListener.playerTicket.size() + ")" + "§9 ] --------+");
+				
+					for (Entry<String, String> entry : TicketListener.playerTicket.entrySet()) {
+						sender.sendMessage("§9" + entry.getKey() + "§f: " + entry.getValue());
+					}
+				
+					sender.sendMessage("§9+---------------------------------+");
+					
+				} else {
+					sender.sendMessage("§9There are no tickets available.");
+				}
+				break;
+			case "tp":
+				sender.sendMessage("§cIncorrect syntax, usage: /ticket tp <name>");
+				break;
+			case "cl":
+				sender.sendMessage("§cIncorrect syntax, usage: /ticket cl <name>");
+				break;
+			case "del":
+				sender.sendMessage("§cIncorrect syntax, usage: /ticket del <name>");
+				break;
+			case "clear":
+				if (!TicketListener.playerTicket.isEmpty()) {
+					TicketListener.playerTicket.clear();
+					sender.sendMessage("§9Ticket list has been cleared!");
+				} else {
+					sender.sendMessage("§9Ticket list is already empty!");
+				}
+				break;
+			default:
+				sender.sendMessage("Please use §9/ticket§f to view a list of commands.");
+				break;
+			}
+		}
+		else if (args.length == 2) {
+			
+			Player player = Bukkit.getPlayer(args[1]);
+			
+			if (player != null) {
+				
+				switch(args[0]) {
+				case "tp":
+					if (TicketListener.playerTicket.containsKey(player.getName())) {
+					
+						TicketListener.playerTicket.remove(player.getName());
+						sender.sendMessage("Teleporting to " + "§9" + player.getName() + "§f...");
+						((Player) sender).teleport(player.getLocation());
+						
+					} else {
+						
+						sender.sendMessage("§9" + player.getName() + " §fhasn't triggered a ticket.");
+					}
+					break;
+				case "cl":
+					if (TicketListener.playerTicket.containsKey(player.getName())) {
+					
+						TicketListener.playerTicket.remove(player.getName());
+						sender.sendMessage("Claimed§9 " + player.getName() + "'s §fticket.");
+						
+					} else {
+						
+						sender.sendMessage("§9" + player.getName() + " §fhasn't triggered a ticket.");
+					}
+					break;
+				case "del":
+					if (TicketListener.playerTicket.containsKey(player.getName())) {
+					
+						TicketListener.playerTicket.remove(player.getName());
+						sender.sendMessage("Removed§9 " + player.getName() + "'s §fticket.");
+						
+					} else {
+						
+						sender.sendMessage("§9" + player.getName() + " §fhasn't triggered a ticket.");
+					}
+					break;
+				default:
+					sender.sendMessage("Please use §9/ticket§f to view a list of commands.");
+					break;
+				}
+				
+			} else {
+				sender.sendMessage("§cError: " + args[1] + " is offline!");
+			}
+		}
+		
+		return true;
+	}
+	
+	private void initCommandList(CommandSender sender) {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("§9+-------------- [ §f" + "v" + pluginVersion + " " + pluginName + "§9 ] -------------------+\n")
+		.append("§9-/ticket§f - Displays a list of commands.\n")
+		.append("§9-/ticket readfile§f - Displays logged info from file.\n")
+		.append("§9-/ticket list§f - Displays a list of open tickets.\n")
+		.append("§9-/ticket tp <name>§f - Teleports to specified player.\n")
+		.append("§9-/ticket cl <name>§f - Claims specified ticket.\n")
+		.append("§9-/ticket del <name>§f - Deletes specified ticket.\n")
+		.append("§9-/ticket clear§f - Clears all open tickets.\n")
+		.append("§9+---------------------------------------------------+");
+		
+		sender.sendMessage(sb.toString());
 	}
 }

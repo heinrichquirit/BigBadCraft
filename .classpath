@@ -2,7 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/craftbukkit.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/BKCommonLib-1.51.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/Vault (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/bukkit-1.6.2-R0.1-20130711.012359-4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/craftbukkit-1.6.2-R0.1-20130709.000904-1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

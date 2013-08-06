@@ -7,24 +7,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class TicketScheduler extends BukkitRunnable {
-	
-	private Main plugin;
-	public TicketScheduler(Main plugin) {
-		this.plugin = plugin;
-	}
-
 	public void run() {
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			if(p.hasPermission("staffticket.mod")) {
-				if(Main.playerTicket.isEmpty()) {
-					p.sendMessage("§aNotice§f - There are no tickets available.");
+		for (Player player : Bukkit.getOnlinePlayers()) {
+			if (player.hasPermission(Permission.PERMISSION)) {
+				if (TicketListener.playerTicket.isEmpty()) {
+					player.sendMessage("§9Notice§f - There are no tickets available.");
 				} else {
-					p.sendMessage("--- §aBigBadCraft: §f(" + plugin.ticketCounter + ") ---");
-					for(Entry<String, String> entry : Main.playerTicket.entrySet()) {
-						p.sendMessage("§a" + entry.getKey() + "§f" + entry.getValue());
+					player.sendMessage("§9+-------- §f[ §9Notice" + " §f(" + TicketListener.playerTicket.size() + ")" + " ]§9 --------+");
+					for (Entry<String, String> entry : TicketListener.playerTicket.entrySet()) {
+						player.sendMessage("§9" + entry.getKey() + "§f: "  + entry.getValue());
 					}
 				}
 			}
 		}
 	}
 }
+

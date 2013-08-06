@@ -2,18 +2,27 @@ name: BigBadCraft
 main: me.bigbadhenz.bigbadcraft.ticket.Main
 version: 1.5
 website: www.bigbadcraft.net
+softdepend: [Vault]
 commands:
+  mod:
+    description: Reads mail from staff.
+    permission: staffticket.mod 
+    permission-message: §cYou do not have <permission>
+  title:
+    description: Changes or adds a title to your prefix.
+    permission: bigbadcraft.titles
+    permission-message: §cYou do not have <permission>
+    default: op
+  search:
+    description: Searches for players information.
+    permission: bigbadcraft.staff
+    permission-message: §cYou do not have <permission>
   fakeop:
     description: Trolol.
     permission: bigbadcraft.fakeop
   id:
     description: Returns item id in hand.
     permission: bigbadcraft.id
-    permission-message: §cYou do not have <permission>
-    default: op
-  work:
-    description: Opens a workbench at current location.
-    permission: bigbadcraft.workbench
     permission-message: §cYou do not have <permission>
     default: op
   coal:

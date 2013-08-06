@@ -1,5 +1,8 @@
 package me.bigbadhenz.bigbadcraft.ticket;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,48 +12,48 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class TicketListener implements Listener {
 	
+	public static Map<String, String> playerTicket;
+	
 	private Main plugin;
 	public TicketListener(Main plugin) {
 		this.plugin = plugin;
+		
+		TicketListener.playerTicket = new HashMap<String, String>();
 	}
 	
+	// Storing the triggered ticket
 	@EventHandler
-	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		String playerName = event.getPlayer().getName();
-		String playerMessage = ": " + event.getMessage();
-		Player p = Bukkit.getPlayer(playerName);
-		for (String s : plugin.getConfig().getStringList("trigger")) {
-			if (event.getMessage().contains(s)) {
-				if (!Main.playerTicket.containsKey(playerName) && !event.getPlayer().hasPermission("staffticket.mod")) {
-					plugin.ticketCounter++;
-					Bukkit.broadcast("§4" + p.getName() + playerMessage, "staffticket.mod");
-					Main.playerTicket.put(p.getName(), playerMessage);
+	public void onChat(AsyncPlayerChatEvent event) {
+		final Player player = event.getPlayer();
+		
+		for (String message : plugin.getConfig().getStringList("ticket-list.trigger")) {
+			
+			if (event.getMessage().contains(message)) {
+				
+				if (!playerTicket.containsKey(event.getPlayer().getName()) && !event.getPlayer().hasPermission(Permission.PERMISSION)) {
+					Bukkit.broadcast("§c" + event.getPlayer().getName() + ": " + event.getMessage(), Permission.PERMISSION);
+					playerTicket.put(event.getPlayer().getName(), event.getMessage());
+					
+					if (plugin.getConfig().getBoolean("ticket-list.log-ticket-information")) {
+						
+						int x = (int) Math.round(player.getLocation().getX());
+						int y = (int) Math.round(player.getLocation().getY());
+						int z = (int) Math.round(player.getLocation().getZ());
+						
+						DataStorage.logData(player.getName(), event.getMessage(), x, y, z);
+					}
+					
 				}
 			}
 		}
-		
-		boolean fire = event.getMessage().contains("fire");
-		boolean water = event.getMessage().contains("water");
-		boolean lava = event.getMessage().contains("lava");
-		boolean grief = event.getMessage().contains("grief");
-		boolean portal = event.getMessage().contains("portal");
-		boolean mod = event.getMessage().contains("mod");
-			
-		if (fire || water || lava || grief || portal || mod) {
-			if (!Main.playerTicket.containsKey(playerName) && !event.getPlayer().hasPermission("staffticket.mod")) {
-				plugin.ticketCounter++;
-				Bukkit.broadcast("§4" + p.getName() + playerMessage, "staffticket.mod");
-				Main.playerTicket.put(p.getName(), playerMessage);
-			}
-		}
 	}
 	
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event) {
-		if (Main.playerTicket.containsKey(event.getPlayer().getName())) {
-			plugin.ticketCounter--;
-			Main.playerTicket.remove(event.getPlayer().getName());
+	public void onQuit(PlayerQuitEvent event) {
+		if (plugin.getConfig().getBoolean("ticket-list.delete-on-leave")) {
+			if (playerTicket.containsKey(event.getPlayer().getName())) {
+				playerTicket.remove(event.getPlayer().getName());
+			}
 		}
 	}
-
 }
