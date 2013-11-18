@@ -1,54 +1,74 @@
 name: BigBadCraft
 main: me.bigbadhenz.bigbadcraft.ticket.Main
-version: 1.5
+version: 2.0
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
   mod:
     description: Reads mail from staff.
     permission: staffticket.mod 
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
   title:
     description: Changes or adds a title to your prefix.
     permission: bigbadcraft.titles
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
     default: op
   search:
     description: Searches for players information.
     permission: bigbadcraft.staff
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
   fakeop:
     description: Trolol.
     permission: bigbadcraft.fakeop
   id:
     description: Returns item id in hand.
     permission: bigbadcraft.id
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
     default: op
   coal:
     description: Spawns coal pstone ore.
     permission: bigbadcraft.pstone
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
     default: op
   lapis:
     description: Spawns lapis pstone ore.
     permission: bigbadcraft.pstone
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
     default: op
   diamond:
     description: Spawns diamond pstone ore.
     permission: bigbadcraft.pstone
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
     default: op
   redstone:
     description: Spawns redstone pstone ore.
     permission: bigbadcraft.pstone
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
     default: op
   helpop:
     description: Submits a ticket.
   ticket:
     description: A list of commands.
     permission: staffticket.mod
-    permission-message: §cYou do not have <permission>
+    permission-message: You do not have <permission>
+    default: op
+  namemob:
+    description: Provides modified nametab with a given argument.
+    permission: bigbadcraft.nametag
+    permission-message: You do not have <permission>
+    default: op
+  title:
+    description: Allows users to set their titles.
+    permission: bigbadcraft.title
+    permission-message: You do not have <permission>
+    default: op
+  titleclear:
+    description: Allows users to clear their title.
+    permission: bigbadcraft.title
+    permission-message: You do not have <permission>
+    default: op
+  ride:
+    description: Rides specified player.
+    permission: bigbadcraft.ride
+    permission-message: You do not have <permission>
     default: op
