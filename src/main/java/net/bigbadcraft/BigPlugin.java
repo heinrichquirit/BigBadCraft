@@ -80,7 +80,6 @@ public class BigPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PreventBadDispense(), this);
         // Registers BlockChangeListener
         getServer().getPluginManager().registerEvents(new BlockChangeListener(), this);
-        // Registers CommandListener to prevent fagget elbacon's gay bed home
         getServer().getPluginManager().registerEvents(new BedListener(), this);
 
         setupEconomy();
