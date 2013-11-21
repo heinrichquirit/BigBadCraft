@@ -1,7 +1,14 @@
 package main.java.net.bigbadcraft;
 
+import java.io.File;
+import java.util.List;
+
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
+import main.java.net.bigbadcraft.inventorymenu.IconMenuListener;
+import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
+import main.java.net.bigbadcraft.miscellaneous.VoteListener;
+import main.java.net.bigbadcraft.miscellaneous.ZombieReinforcementsListener;
 import main.java.net.bigbadcraft.namethatmob.command.NameMobCommand;
 import main.java.net.bigbadcraft.namethatmob.listener.EntityInteractListener;
 import main.java.net.bigbadcraft.namethatmob.utils.NameManager;
@@ -23,12 +30,10 @@ import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 import main.java.net.bigbadcraft.warns.WarnsCommand;
 import main.java.net.bigbadcraft.warns.WarnsManager;
 import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * User: Heinrich Quirit
@@ -80,7 +85,16 @@ public class BigPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PreventBadDispense(), this);
         // Registers BlockChangeListener
         getServer().getPluginManager().registerEvents(new BlockChangeListener(), this);
+        // Registers PlayerCommandPreProccessevent
         getServer().getPluginManager().registerEvents(new BedListener(), this);
+        // Registers random firework generator on PlayerJoinListener
+        getServer().getPluginManager().registerEvents(new FireworkOnJoinListener(), this);
+        // Registers ZombieReinforcementsListener
+        getServer().getPluginManager().registerEvents(new ZombieReinforcementsListener(), this);
+        // Registers IconMenuListener
+        getServer().getPluginManager().registerEvents(new IconMenuListener(this), this);
+        // Registers VoteListener
+        getServer().getPluginManager().registerEvents(new VoteListener(this), this);
 
         setupEconomy();
 
