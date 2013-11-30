@@ -26,6 +26,7 @@ import main.java.net.bigbadcraft.stafftickets.listeners.ChatListener;
 import main.java.net.bigbadcraft.stafftickets.listeners.CommandListener;
 import main.java.net.bigbadcraft.stafftickets.listeners.QuitListener;
 import main.java.net.bigbadcraft.stafftickets.tasks.BroadcastTask;
+import main.java.net.bigbadcraft.stafftickets.utils.SQLite;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 import main.java.net.bigbadcraft.warns.WarnsCommand;
 import main.java.net.bigbadcraft.warns.WarnsManager;
@@ -59,6 +60,10 @@ public class BigPlugin extends JavaPlugin {
     public TicketManager ticketMang;
     public NameManager nameMang;
     public WarnsManager warnsMang;
+    
+    // Inventory database
+    private SQLite sql;
+    private File flatFile;
 
     // Dependencies
     public static Economy economy = null;
@@ -97,6 +102,7 @@ public class BigPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new VoteListener(this), this);
 
         setupEconomy();
+        setupInvDatabase();
 
     }
 
@@ -105,6 +111,9 @@ public class BigPlugin extends JavaPlugin {
         // Clear tickets
         ticketMang.clearTickets();
         ticketMang.helpopClear();
+        
+        // Close database connection
+        sql.close();
     }
 
     private void initTicketSystem() {
@@ -159,6 +168,14 @@ public class BigPlugin extends JavaPlugin {
             economy = (Economy) economyProvider.getProvider();
         }
         return economy != null;
+    }
+    
+    // Set up flatfile database, why not a MySQL one Skepter?
+    private void setupInvDatabase() {
+    	flatFile = new File(getDataFolder(), "inventories.db");
+    	sql = new SQLite(flatFile);
+    	sql.open();
+    	sql.execute("CREATE TABLE IF NOT EXISTS database(playername VARCHAR(16), inventory VARCHAR(10000), armor VARCHAR(10000), enderchest VARCHAR(10000);");
     }
 
 }

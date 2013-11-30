@@ -2,6 +2,7 @@ package main.java.net.bigbadcraft.miscellaneous;
 
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
@@ -11,14 +12,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class FireworkOnJoinListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onJoin(PlayerJoinEvent event) {
+		event.setJoinMessage(ChatColor.YELLOW + event.getPlayer().getName() + " has joined the network.");
 		Firework firework = (Firework) event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.FIREWORK);
 		randomizeFirework(firework);
+	}
+	
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onLeave(PlayerQuitEvent event) {
+		event.setQuitMessage(ChatColor.YELLOW + event.getPlayer().getName() + " has left the network.");
 	}
 	
 	private void randomizeFirework(Firework firework) {
