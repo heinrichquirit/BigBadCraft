@@ -1,4 +1,4 @@
-package main.java.net.bigbadcraft.stafftickets.utils;
+package main.java.net.bigbadcraft.utils;
 
 import java.util.ArrayList;
 import java.util.List;

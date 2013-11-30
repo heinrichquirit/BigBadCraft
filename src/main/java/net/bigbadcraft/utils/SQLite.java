@@ -1,4 +1,4 @@
-package main.java.net.bigbadcraft.stafftickets.utils;
+package main.java.net.bigbadcraft.utils;
 
 import java.io.File;
 import java.sql.Connection;
