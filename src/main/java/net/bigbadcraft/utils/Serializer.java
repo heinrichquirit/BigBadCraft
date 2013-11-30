@@ -171,7 +171,7 @@ public class Serializer {
 			String[] serializedBlock = serializedBlocks[i].split("#");
 
 			ItemStack is = null;
-			Boolean createdItemStack = false;
+			boolean createdItemStack = false;
 
 			String[] serializedItemStack = serializedBlock[1].split(":");
 			List<String> lores = new ArrayList<String>();
