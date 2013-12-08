@@ -20,7 +20,7 @@ import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
 
 enum PrefixType {
-	INFO("[Votifier Info] "), WARNING("[Votifier Warning ]"), SEVERE("[Votifier Severe ]");
+	INFO("[Votifier Info] "), WARNING("[Votifier Warning] "), SEVERE("[Votifier Severe] ");
 	
 	String name;
 	

@@ -20,7 +20,7 @@ public class BlockChangeListener implements Listener {
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
         final Player player = event.getPlayer();
-        if (player.getWorld().equals(Bukkit.getServer().getWorld("BigBadCraft_horses"))) {
+        if (player.getWorld().equals(Bukkit.getServer().getWorld("BigBadCraft_1"))) {
             if (!player.hasPermission("bigbadcraft.member")) {
                 player.sendMessage(GREEN + "Hey, you're new!.");
                 player.sendMessage(GREEN + "Feel free to look around this world.");
@@ -33,7 +33,7 @@ public class BlockChangeListener implements Listener {
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
         final Player player = event.getPlayer();
-        if (player.getWorld().equals(Bukkit.getServer().getWorld("BigBadCraft_horses"))) {
+        if (player.getWorld().equals(Bukkit.getServer().getWorld("BigBadCraft_1"))) {
             if (!player.hasPermission("bigbadcraft.member")) {
                 player.sendMessage(GREEN + "Hey, you're new!.");
                 player.sendMessage(GREEN + "Feel free to look around this world.");

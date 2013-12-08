@@ -5,7 +5,6 @@ import java.util.List;
 
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
-import main.java.net.bigbadcraft.inventorymenu.IconMenuListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
 import main.java.net.bigbadcraft.miscellaneous.VoteListener;
 import main.java.net.bigbadcraft.miscellaneous.ZombieReinforcementsListener;
@@ -27,7 +26,6 @@ import main.java.net.bigbadcraft.stafftickets.listeners.CommandListener;
 import main.java.net.bigbadcraft.stafftickets.listeners.QuitListener;
 import main.java.net.bigbadcraft.stafftickets.tasks.BroadcastTask;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
-import main.java.net.bigbadcraft.utils.SQLite;
 import main.java.net.bigbadcraft.warns.WarnsCommand;
 import main.java.net.bigbadcraft.warns.WarnsManager;
 import net.milkbowl.vault.economy.Economy;
@@ -46,7 +44,7 @@ public class BigPlugin extends JavaPlugin {
     // Ticket System Variables
     private File config;
     private File ticketLogs;
-
+    
     // NameThatMob Variables
     public int price;
     public int charCount;
@@ -60,10 +58,6 @@ public class BigPlugin extends JavaPlugin {
     public TicketManager ticketMang;
     public NameManager nameMang;
     public WarnsManager warnsMang;
-    
-    // Inventory database
-    private SQLite sql;
-    private File flatFile;
 
     // Dependencies
     public static Economy economy = null;
@@ -96,14 +90,10 @@ public class BigPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FireworkOnJoinListener(), this);
         // Registers ZombieReinforcementsListener
         getServer().getPluginManager().registerEvents(new ZombieReinforcementsListener(), this);
-        // Registers IconMenuListener
-        getServer().getPluginManager().registerEvents(new IconMenuListener(this), this);
         // Registers VoteListener
         getServer().getPluginManager().registerEvents(new VoteListener(this), this);
 
         setupEconomy();
-        setupInvDatabase();
-
     }
 
     @Override
@@ -111,9 +101,6 @@ public class BigPlugin extends JavaPlugin {
         // Clear tickets
         ticketMang.clearTickets();
         ticketMang.helpopClear();
-        
-        // Close database connection
-        sql.close();
     }
 
     private void initTicketSystem() {
@@ -170,12 +157,4 @@ public class BigPlugin extends JavaPlugin {
         return economy != null;
     }
     
-    // Set up flatfile database, why not a MySQL one Skepter?
-    private void setupInvDatabase() {
-    	flatFile = new File(getDataFolder(), "inventories.db");
-    	sql = new SQLite(flatFile);
-    	sql.open();
-    	sql.execute("CREATE TABLE IF NOT EXISTS database(playername VARCHAR(16), inventory VARCHAR(10000), armor VARCHAR(10000), enderchest VARCHAR(10000);");
-    }
-
 }
