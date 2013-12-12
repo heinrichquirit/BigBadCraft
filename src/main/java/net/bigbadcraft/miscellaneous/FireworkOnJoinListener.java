@@ -19,14 +19,22 @@ public class FireworkOnJoinListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onJoin(PlayerJoinEvent event) {
-		event.setJoinMessage(ChatColor.YELLOW + event.getPlayer().getName() + " has joined the network.");
-		Firework firework = (Firework) event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.FIREWORK);
-		randomizeFirework(firework);
+		if (!event.getPlayer().getName().equals("BigBadHenz")) {
+			event.setJoinMessage(ChatColor.YELLOW + event.getPlayer().getName() + " has joined the network.");
+			Firework firework = (Firework) event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.FIREWORK);
+			randomizeFirework(firework);
+		} else {
+			event.getPlayer().sendMessage(ChatColor.RED + "You joined silently, master.");
+			Firework firework = (Firework) event.getPlayer().getWorld().spawnEntity(event.getPlayer().getLocation(), EntityType.FIREWORK);
+			randomizeFirework(firework);
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onLeave(PlayerQuitEvent event) {
-		event.setQuitMessage(ChatColor.YELLOW + event.getPlayer().getName() + " has left the network.");
+		if (!event.getPlayer().getName().equals("BigBadHenz")) {
+			event.setQuitMessage(ChatColor.YELLOW + event.getPlayer().getName() + " has left the network.");
+		}
 	}
 	
 	private void randomizeFirework(Firework firework) {
