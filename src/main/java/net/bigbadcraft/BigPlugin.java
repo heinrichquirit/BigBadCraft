@@ -6,7 +6,8 @@ import java.util.List;
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
-import main.java.net.bigbadcraft.miscellaneous.RegionListener;
+import main.java.net.bigbadcraft.miscellaneous.PayOfflineCommand;
+import main.java.net.bigbadcraft.miscellaneous.PreciousStonesListener;
 import main.java.net.bigbadcraft.miscellaneous.VoteListener;
 import main.java.net.bigbadcraft.miscellaneous.ZombieReinforcementsListener;
 import main.java.net.bigbadcraft.namethatmob.command.NameMobCommand;
@@ -77,8 +78,21 @@ public class BigPlugin extends JavaPlugin {
         initRide();
         
         PluginManager pm = Bukkit.getPluginManager();
+        registerListeners(pm);
+        registerCommands();
 
-        // Registers BuyHeadSignListener
+        setupEconomy();
+    }
+
+    @Override
+    public void onDisable() {
+        // Clear tickets
+        ticketMang.clearTickets();
+        ticketMang.helpopClear();
+    }
+    
+    private void registerListeners(PluginManager pm) {
+    	// Registers BuyHeadSignListener
         pm.registerEvents(new BuyHeadListener(), this);
         // Registers SilkTouchFilterListener
         pm.registerEvents(new SilkTouchFilter(), this);
@@ -96,17 +110,13 @@ public class BigPlugin extends JavaPlugin {
         pm.registerEvents(new ZombieReinforcementsListener(), this);
         // Registers VoteListener
         pm.registerEvents(new VoteListener(this), this);
-        // Registers RegionListener
-        pm.registerEvents(new RegionListener(), this);
+        // Registers PreciousStones listener
+        pm.registerEvents(new PreciousStonesListener(), this);
 
-        setupEconomy();
     }
-
-    @Override
-    public void onDisable() {
-        // Clear tickets
-        ticketMang.clearTickets();
-        ticketMang.helpopClear();
+    
+    private void registerCommands() {
+    	getCommand("opay").setExecutor(new PayOfflineCommand());
     }
 
     private void initTicketSystem() {

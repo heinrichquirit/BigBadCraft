@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/bukkit-1.6.4-R0.1-20130923.182036-4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/Vault.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/WorldGuard.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/WGRegionEvents.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/Votifier.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/PreciousStones.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
