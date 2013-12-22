@@ -14,12 +14,10 @@ public class PreciousStonesListener implements Listener {
 	@EventHandler
 	public void onBreak(BlockBreakEvent e) {
 		Block b = e.getBlock();
-		if (b.getType() == Material.GLOWING_REDSTONE_ORE || b.getType() == Material.REDSTONE_ORE) {
-			if (PreciousStones.API().isPStone(b.getLocation())) {
-				for (ItemStack stack : b.getDrops()) {
-					if (stack.getType() == Material.REDSTONE_WIRE) {
-						stack.setType(Material.AIR);
-					}
+		if (PreciousStones.API().isPStone(b.getLocation())) {
+			for (ItemStack stack : b.getDrops()) {
+				if (stack.getType() == Material.REDSTONE) {
+					stack.setType(Material.AIR);
 				}
 			}
 		}

@@ -31,8 +31,10 @@ import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 import main.java.net.bigbadcraft.warns.WarnsCommand;
 import main.java.net.bigbadcraft.warns.WarnsManager;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -61,9 +63,17 @@ public class BigPlugin extends JavaPlugin {
     public TicketManager ticketMang;
     public NameManager nameMang;
     public WarnsManager warnsMang;
+    
+    // BanCommands variables
+    public File playerCmds;
+    public File groupCmds;
+    
+    public FileConfiguration playerConf;
+    public FileConfiguration groupConf;
 
     // Dependencies
     public static Economy economy = null;
+    public static Permission permission = null;
 
     @Override
     public void onEnable() {
@@ -82,6 +92,7 @@ public class BigPlugin extends JavaPlugin {
         registerCommands();
 
         setupEconomy();
+        setupPermissions();
     }
 
     @Override
@@ -112,7 +123,6 @@ public class BigPlugin extends JavaPlugin {
         pm.registerEvents(new VoteListener(this), this);
         // Registers PreciousStones listener
         pm.registerEvents(new PreciousStonesListener(), this);
-
     }
     
     private void registerCommands() {
@@ -154,7 +164,7 @@ public class BigPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityInteractListener(this), this);
         getCommand("namemob").setExecutor(new NameMobCommand(this));
     }
-
+    
     private void initWarns() {
         warnsMang = new WarnsManager();
         getCommand("warn").setExecutor(new WarnsCommand(this));
@@ -171,6 +181,14 @@ public class BigPlugin extends JavaPlugin {
             economy = (Economy) economyProvider.getProvider();
         }
         return economy != null;
+    }
+    
+    private boolean setupPermissions(){
+        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+        if (permissionProvider != null) {
+            permission = permissionProvider.getProvider();
+        }
+        return (permission != null);
     }
     
 }

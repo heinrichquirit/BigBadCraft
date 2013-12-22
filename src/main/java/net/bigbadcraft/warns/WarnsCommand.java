@@ -39,12 +39,16 @@ public class WarnsCommand implements CommandExecutor {
         if ((strings.length == 0) || (strings.length == 1)) {
             player.sendMessage(this.RED + "Incorrect syntax, usage: /warn <player> <message>");
             return true;
-        }if (strings.length >= 2) {
+        } else if (strings.length >= 2) {
             Player target = Bukkit.getPlayer(strings[0]);
             String message = StringUtils.join(strings, ' ', 1, strings.length);
             if (target != null) {
-                this.warnsMang.warnUser(player, target, message);
-                Bukkit.broadcastMessage(RED + target.getName() + " has been warned for an offense: (" + warnsMang.getWarns(target) + "/3)");
+            	if (!target.hasPermission("bigbadcraft.staff")) {
+	                this.warnsMang.warnUser(player, target, message);
+	                Bukkit.broadcastMessage(RED + target.getName() + " has been warned for an offense: (" + warnsMang.getWarns(target) + "/3)");
+            	} else {
+            		player.sendMessage(RED + "Cannot warn staff member: " + target.getName());
+            	}
             } else {
                 player.sendMessage(RED + strings[0] + " is offline!");
             }

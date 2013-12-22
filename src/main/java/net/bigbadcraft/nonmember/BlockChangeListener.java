@@ -22,10 +22,11 @@ public class BlockChangeListener implements Listener {
         final Player player = event.getPlayer();
         if (player.getWorld().equals(Bukkit.getServer().getWorld("BigBadCraft_survival"))) {
             if (!player.hasPermission("bigbadcraft.member")) {
-                player.sendMessage(GREEN + "Hey, you're new!.");
+                player.sendMessage(GREEN + "Hey, you're new!");
                 player.sendMessage(GREEN + "Feel free to look around this world.");
                 player.sendMessage(GREEN + "But if you want to start building, please register");
-                player.sendMessage(GREEN + "for free membership @ www.bigbadcraft.net");
+                player.sendMessage(GREEN + "for free membership @ " + ChatColor.YELLOW + "www.bigbadcraft.net");
+                event.setCancelled(true);
             }
         }
     }
@@ -35,10 +36,11 @@ public class BlockChangeListener implements Listener {
         final Player player = event.getPlayer();
         if (player.getWorld().equals(Bukkit.getServer().getWorld("BigBadCraft_survival"))) {
             if (!player.hasPermission("bigbadcraft.member")) {
-                player.sendMessage(GREEN + "Hey, you're new!.");
+                player.sendMessage(GREEN + "Hey, you're new!");
                 player.sendMessage(GREEN + "Feel free to look around this world.");
                 player.sendMessage(GREEN + "But if you want to start building, please register");
-                player.sendMessage(GREEN + "for free membership @ www.bigbadcraft.net");
+                player.sendMessage(GREEN + "for free membership @ " + ChatColor.YELLOW + "www.bigbadcraft.net");
+                event.setCancelled(true);
             }
         }
     }
