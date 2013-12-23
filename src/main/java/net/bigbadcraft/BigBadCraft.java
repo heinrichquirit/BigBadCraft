@@ -6,6 +6,7 @@ import java.util.List;
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
+import main.java.net.bigbadcraft.miscellaneous.ItemIDCommand;
 import main.java.net.bigbadcraft.miscellaneous.PayOfflineCommand;
 import main.java.net.bigbadcraft.miscellaneous.PreciousStonesListener;
 import main.java.net.bigbadcraft.miscellaneous.VoteListener;
@@ -133,6 +134,8 @@ public class BigBadCraft extends JavaPlugin {
     
     private void registerCommands() {
     	getCommand("opay").setExecutor(new PayOfflineCommand());
+    	
+    	getCommand("id").setExecutor(new ItemIDCommand());
     }
 
     private void initTicketSystem() {

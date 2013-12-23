@@ -4,6 +4,9 @@ version: 2.0
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
+  id:
+    description: Item ID command.
+    default: op
   opay:
     description: Offline pay command.
   helpop:
