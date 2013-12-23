@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -34,11 +34,11 @@ public class TicketManager {
     private Map<String, String> tickets;
     private Map<String, ArrayList<String>> helpopTickets;
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
     private String plugName;
     private String plugVer;
 
-    public TicketManager(BigPlugin plugin) {
+    public TicketManager(BigBadCraft plugin) {
         tickets = new HashMap<String, String>();
         helpopTickets = new HashMap<String, ArrayList<String>>();
         this.plugin = plugin;

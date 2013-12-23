@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.listeners;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.stafftickets.utils.Perm;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 import org.bukkit.ChatColor;
@@ -19,9 +19,9 @@ public class ChatListener implements Listener {
     private ChatColor RED = ChatColor.RED;
 
     private TicketManager ticketMang;
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
 
-    public ChatListener(BigPlugin plugin) {
+    public ChatListener(BigBadCraft plugin) {
         this.plugin = plugin;
         this.ticketMang = plugin.ticketMang;
     }

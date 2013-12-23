@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.listeners;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 
 import org.bukkit.entity.Player;
@@ -16,9 +16,9 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 public class CommandListener implements Listener {
 
     private TicketManager ticketMang;
-    protected BigPlugin plugin;
+    protected BigBadCraft plugin;
 
-    public CommandListener(BigPlugin plugin) {
+    public CommandListener(BigBadCraft plugin) {
         this.plugin = plugin;
         this.ticketMang = plugin.ticketMang;
     }

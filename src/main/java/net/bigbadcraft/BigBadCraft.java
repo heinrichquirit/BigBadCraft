@@ -28,6 +28,8 @@ import main.java.net.bigbadcraft.stafftickets.listeners.CommandListener;
 import main.java.net.bigbadcraft.stafftickets.listeners.QuitListener;
 import main.java.net.bigbadcraft.stafftickets.tasks.BroadcastTask;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
+import main.java.net.bigbadcraft.utils.CommandLogger;
+import main.java.net.bigbadcraft.utils.Utilities;
 import main.java.net.bigbadcraft.warns.WarnsCommand;
 import main.java.net.bigbadcraft.warns.WarnsManager;
 import net.milkbowl.vault.economy.Economy;
@@ -44,7 +46,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Last Modified: 10/2/13
  * Time: 4:34 AM
  */
-public class BigPlugin extends JavaPlugin {
+public class BigBadCraft extends JavaPlugin {
 
     // Ticket System Variables
     private File config;
@@ -75,12 +77,16 @@ public class BigPlugin extends JavaPlugin {
     public static Economy economy = null;
     public static Permission permission = null;
 
+    // Utilities
+    
     @Override
     public void onEnable() {
 
         saveDefaultConfig();
 
         new Recipes();
+        new Utilities();
+        new CommandLogger(this);
 
         initTicketSystem();
         initNameThatMob();

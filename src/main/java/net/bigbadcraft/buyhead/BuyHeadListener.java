@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.buyhead;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -34,11 +34,11 @@ public class BuyHeadListener implements Listener {
                 Sign sign = (Sign) event.getClickedBlock().getState();
                 if (sign.getLine(0).equalsIgnoreCase(DARKBLUE + "[BuyHead]")) {
                     int price = Integer.parseInt(sign.getLine(1));
-                    int balance = (int) Math.round(BigPlugin.economy.getBalance(player.getName()));
+                    int balance = (int) Math.round(BigBadCraft.economy.getBalance(player.getName()));
                     if (balance >= price) {
                         player.getInventory().addItem(playerSkull(player.getName()));
                         player.updateInventory();
-                        BigPlugin.economy.withdrawPlayer(player.getName(), price);
+                        BigBadCraft.economy.withdrawPlayer(player.getName(), price);
                         player.sendMessage(GREEN + "$" + price + " has been taken from your account.");
                     } else {
                         player.sendMessage(RED + "You do not have enough money!");

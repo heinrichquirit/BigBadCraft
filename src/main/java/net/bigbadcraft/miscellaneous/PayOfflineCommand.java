@@ -2,7 +2,7 @@ package main.java.net.bigbadcraft.miscellaneous;
 
 import java.io.File;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,8 +33,8 @@ public class PayOfflineCommand implements CommandExecutor {
 						
 						File file = new File(essentials, "/userdata/" + name +".yml");
 						if (file.exists()) {
-							BigPlugin.economy.depositPlayer(name, amount);
-							BigPlugin.economy.withdrawPlayer(p.getName(), amount);
+							BigBadCraft.economy.depositPlayer(name, amount);
+							BigBadCraft.economy.withdrawPlayer(p.getName(), amount);
 							p.sendMessage(GREEN + "Successfully made an offline payment of $" + amount + " to " + name + ".");
 							Bukkit.dispatchCommand(p, "mail send " + name + " I've made an offline payment of $" 
 									+ amount + " to you."); 

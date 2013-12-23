@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.commands;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,10 +22,10 @@ public class TicketCommand implements CommandExecutor {
     private ChatColor BLUE = ChatColor.BLUE;
     private ChatColor RED = ChatColor.RED;
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
     private TicketManager ticketMang;
 
-    public TicketCommand(BigPlugin plugin) {
+    public TicketCommand(BigBadCraft plugin) {
         this.plugin = plugin;
         this.ticketMang = plugin.ticketMang;
     }
@@ -96,6 +96,8 @@ public class TicketCommand implements CommandExecutor {
                         ticketMang.helpopDelete(target);
                         player.sendMessage("Teleporting to " + BLUE + target.getName() + WHITE + "..");
                         player.teleport(target.getLocation());
+                        ticketMang.notifyStaff(BLUE + player.getName() + WHITE + " is now handling with "
+                        		+ BLUE + target.getName() + WHITE + "'s issue.");
                     } else {
                         player.sendMessage(BLUE + target.getName() + WHITE + " has no ticket(s).");
                     }
@@ -104,6 +106,8 @@ public class TicketCommand implements CommandExecutor {
                         ticketMang.deleteTicket(target);
                         ticketMang.helpopDelete(target);
                         player.sendMessage("Claimed " + BLUE + target.getName() + WHITE + "'s ticket.");
+                        ticketMang.notifyStaff(BLUE + player.getName() + WHITE + " has claimed " + BLUE 
+                        		+ target.getName() + WHITE + "'s ticket.");
                     } else {
                         player.sendMessage(BLUE + target.getName() + WHITE + " has no ticket(s).");
                     }
@@ -112,6 +116,8 @@ public class TicketCommand implements CommandExecutor {
                         ticketMang.deleteTicket(target);
                         ticketMang.helpopDelete(target);
                         player.sendMessage("Deleted " + BLUE + target.getName() + WHITE + "'s ticket.");
+                        ticketMang.notifyStaff(BLUE + player.getName() + WHITE + " has deleted " + BLUE 
+                        		+ target.getName() + WHITE + "'s ticket.");
                     } else {
                         player.sendMessage(BLUE + target.getName() + WHITE + " has no ticket(s).");
                     }

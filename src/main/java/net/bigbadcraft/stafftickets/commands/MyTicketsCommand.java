@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.commands;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,9 +14,9 @@ import org.bukkit.entity.Player;
  */
 public class MyTicketsCommand implements CommandExecutor {
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
 
-    public MyTicketsCommand(BigPlugin plugin) {
+    public MyTicketsCommand(BigBadCraft plugin) {
         this.plugin = plugin;
     }
 

@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.namethatmob.command;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.namethatmob.utils.NameManager;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
@@ -19,10 +19,10 @@ public class NameMobCommand implements CommandExecutor {
     private final ChatColor GREEN = ChatColor.GREEN;
     private final ChatColor RED = ChatColor.RED;
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
     private NameManager nameMang;
 
-    public NameMobCommand(BigPlugin plugin) {
+    public NameMobCommand(BigBadCraft plugin) {
         this.plugin = plugin;
         this.nameMang = plugin.nameMang;
     }

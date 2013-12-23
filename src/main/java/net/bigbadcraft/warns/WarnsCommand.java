@@ -1,6 +1,8 @@
 package main.java.net.bigbadcraft.warns;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
+import main.java.net.bigbadcraft.utils.CommandLogger;
+
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,9 +20,9 @@ public class WarnsCommand implements CommandExecutor {
 
     private final ChatColor RED = ChatColor.RED;
     private WarnsManager warnsMang;
-    protected BigPlugin plugin;
+    protected BigBadCraft plugin;
 
-    public WarnsCommand(BigPlugin plugin) {
+    public WarnsCommand(BigBadCraft plugin) {
         this.plugin = plugin;
         this.warnsMang = plugin.warnsMang;
     }
@@ -47,7 +49,8 @@ public class WarnsCommand implements CommandExecutor {
 	                this.warnsMang.warnUser(player, target, message);
 	                Bukkit.broadcastMessage(RED + target.getName() + " has been warned for an offense: (" + warnsMang.getWarns(target) + "/3)");
             	} else {
-            		player.sendMessage(RED + "Cannot warn staff member: " + target.getName());
+            		CommandLogger.logWarnCommand(player.getName(), target.getName());
+            		player.sendMessage(RED + "You should not be warning a staff member. Your name has been logged.");
             	}
             } else {
                 player.sendMessage(RED + strings[0] + " is offline!");

@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.tasks;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.stafftickets.utils.Perm;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,9 +17,9 @@ public class BroadcastTask extends BukkitRunnable {
     private ChatColor BLUE = ChatColor.BLUE;
     private ChatColor WHITE = ChatColor.WHITE;
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
 
-    public BroadcastTask(BigPlugin plugin) {
+    public BroadcastTask(BigBadCraft plugin) {
         this.plugin = plugin;
     }
 

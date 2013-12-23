@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Level;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,13 +21,13 @@ import org.bukkit.plugin.Plugin;
  */
 public class NameManager {
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
 
     private HashMap<String, String> mobName;
     private HashSet<EntityType> monsters;
     private HashSet<EntityType> animals;
 
-    public NameManager(BigPlugin plugin) {
+    public NameManager(BigBadCraft plugin) {
         this.plugin = plugin;
         mobName = new HashMap<String, String>();
         monsters = new HashSet<EntityType>();
@@ -79,13 +79,13 @@ public class NameManager {
     public void withdraw(Player player) {
         int price = Math.round(plugin.price);
         if (plugin.vaultEnabled) {
-            BigPlugin.economy.withdrawPlayer(player.getName(), price);
+            BigBadCraft.economy.withdrawPlayer(player.getName(), price);
             player.sendMessage(ChatColor.GREEN + "[NameThatMob] $" + price + " has been taken from your account.");
         }
     }
 
     public boolean isPoor(Player player) {
-        return !(BigPlugin.economy.getBalance(player.getName()) >= Math.round(plugin.price));
+        return !(BigBadCraft.economy.getBalance(player.getName()) >= Math.round(plugin.price));
     }
 
     public void missing(Plugin plugin) {

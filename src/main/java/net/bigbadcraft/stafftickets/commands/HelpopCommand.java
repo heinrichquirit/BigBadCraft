@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.commands;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.stafftickets.utils.TicketManager;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,11 +21,11 @@ public class HelpopCommand implements CommandExecutor {
     private ChatColor BLUE = ChatColor.BLUE;
     private ChatColor WHITE = ChatColor.WHITE;
 
-    protected BigPlugin plugin;
+    protected BigBadCraft plugin;
     private TicketManager ticketMang;
 
 
-    public HelpopCommand(BigPlugin plugin) {
+    public HelpopCommand(BigBadCraft plugin) {
         this.plugin = plugin;
         this.ticketMang = plugin.ticketMang;
     }

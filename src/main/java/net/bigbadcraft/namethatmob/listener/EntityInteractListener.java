@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.namethatmob.listener;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import main.java.net.bigbadcraft.namethatmob.utils.NameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
@@ -16,10 +16,10 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
  */
 public class EntityInteractListener implements Listener {
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
     private NameManager nameMang;
 
-    public EntityInteractListener(BigPlugin plugin) {
+    public EntityInteractListener(BigBadCraft plugin) {
         this.plugin = plugin;
         this.nameMang = plugin.nameMang;
     }

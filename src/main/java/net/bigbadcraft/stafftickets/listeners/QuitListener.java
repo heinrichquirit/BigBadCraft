@@ -1,6 +1,6 @@
 package main.java.net.bigbadcraft.stafftickets.listeners;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -12,9 +12,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
  */
 public class QuitListener implements Listener {
 
-    private BigPlugin plugin;
+    private BigBadCraft plugin;
 
-    public QuitListener(BigPlugin plugin) {
+    public QuitListener(BigBadCraft plugin) {
         this.plugin = plugin;
     }
 

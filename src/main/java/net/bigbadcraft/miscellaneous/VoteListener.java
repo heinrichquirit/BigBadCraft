@@ -3,7 +3,7 @@ package main.java.net.bigbadcraft.miscellaneous;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-import main.java.net.bigbadcraft.BigPlugin;
+import main.java.net.bigbadcraft.BigBadCraft;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -40,8 +40,8 @@ public class VoteListener implements Listener {
 	
 	private final HashMap<String, Integer> votes = new HashMap<String, Integer>();
 	
-	private BigPlugin plugin;
-	public VoteListener(BigPlugin plugin) {
+	private BigBadCraft plugin;
+	public VoteListener(BigBadCraft plugin) {
 		this.plugin = plugin;
 	}
 	
