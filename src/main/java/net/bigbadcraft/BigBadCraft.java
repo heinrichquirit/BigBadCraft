@@ -5,6 +5,8 @@ import java.util.List;
 
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
+import main.java.net.bigbadcraft.lottery.LotteryCommand;
+import main.java.net.bigbadcraft.lottery.LotteryManager;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
 import main.java.net.bigbadcraft.miscellaneous.ItemIDCommand;
 import main.java.net.bigbadcraft.miscellaneous.PayOfflineCommand;
@@ -73,6 +75,9 @@ public class BigBadCraft extends JavaPlugin {
     
     public FileConfiguration playerConf;
     public FileConfiguration groupConf;
+    
+    // Lottery variables
+    public LotteryManager lotteryMang;
 
     // Dependencies
     public static Economy economy = null;
@@ -93,6 +98,7 @@ public class BigBadCraft extends JavaPlugin {
         initNameThatMob();
         initWarns();
         initRide();
+        initLottery();
         
         PluginManager pm = Bukkit.getPluginManager();
         registerListeners(pm);
@@ -172,6 +178,12 @@ public class BigBadCraft extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new EntityInteractListener(this), this);
         getCommand("namemob").setExecutor(new NameMobCommand(this));
+    }
+    
+    private void initLottery() {
+    	lotteryMang = new LotteryManager();
+    	
+    	getCommand("lottery").setExecutor(new LotteryCommand(this));
     }
     
     private void initWarns() {

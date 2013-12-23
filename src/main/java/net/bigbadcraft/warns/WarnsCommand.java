@@ -49,7 +49,7 @@ public class WarnsCommand implements CommandExecutor {
 	                this.warnsMang.warnUser(player, target, message);
 	                Bukkit.broadcastMessage(RED + target.getName() + " has been warned for an offense: (" + warnsMang.getWarns(target) + "/3)");
             	} else {
-            		CommandLogger.logWarnCommand(player.getName(), target.getName());
+            		CommandLogger.logWarnCommand(player.getName(), target.getName(), message);
             		player.sendMessage(RED + "You should not be warning a staff member. Your name has been logged.");
             	}
             } else {

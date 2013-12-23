@@ -1,9 +1,13 @@
 name: BigBadCraft
 main: main.java.net.bigbadcraft.BigBadCraft
 version: 2.0
+author: [BigBadHenz, Skepter]
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
+  lottery:
+    description: The main command.
+    aliases: [l]
   id:
     description: Item ID command.
     default: op
