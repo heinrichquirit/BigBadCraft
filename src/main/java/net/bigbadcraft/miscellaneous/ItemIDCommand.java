@@ -18,7 +18,7 @@ public class ItemIDCommand implements CommandExecutor {
 					int id = player.getItemInHand().getTypeId();
 					byte data = player.getItemInHand().getData().getData();
 					player.sendMessage(ChatColor.GREEN + "Item ID: " + ChatColor.YELLOW
-							+ id + (data != 0 ? ":"+data : ""));
+							+ id + ((data != 0 || data < 0) ? ":"+data : ""));
 				}
 			}
 		}
