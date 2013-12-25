@@ -82,8 +82,12 @@ public class BigBadCraft extends JavaPlugin {
     // Dependencies
     public static Economy economy = null;
     public static Permission permission = null;
-
-    // Utilities
+    
+    /* For later use
+    // Temporary Homes global variable
+    public File voteHomes;
+    public List<String> voteHomesList;
+    */
     
     @Override
     public void onEnable() {
@@ -99,6 +103,7 @@ public class BigBadCraft extends JavaPlugin {
         initWarns();
         initRide();
         initLottery();
+        //initVoteHomes();
         
         PluginManager pm = Bukkit.getPluginManager();
         registerListeners(pm);
@@ -140,7 +145,6 @@ public class BigBadCraft extends JavaPlugin {
     
     private void registerCommands() {
     	getCommand("opay").setExecutor(new PayOfflineCommand());
-    	
     	getCommand("id").setExecutor(new ItemIDCommand());
     }
 
@@ -182,9 +186,33 @@ public class BigBadCraft extends JavaPlugin {
     
     private void initLottery() {
     	lotteryMang = new LotteryManager();
-    	
     	getCommand("lottery").setExecutor(new LotteryCommand(this));
     }
+    
+    /*
+    private void initVoteHomes() {
+    	
+    	voteHomesList = new ArrayList<String>();
+    	
+    	voteHomes = new File(getDataFolder() + "/votehomes.txt");
+        Utilities.loadFile(voteHomes);
+        
+        // Load array list
+        
+        try {
+        	@SuppressWarnings("resource")
+			Scanner in = new Scanner(voteHomes);
+        	
+        	while (in.hasNextLine()) {
+        		voteHomesList.add(in.nextLine());
+        	}
+        } catch (FileNotFoundException e) {
+        	e.printStackTrace();
+        }
+         
+        getCommand("bhome").setExecutor(new TemporaryHomes(this));
+    }
+    */
     
     private void initWarns() {
         warnsMang = new WarnsManager();

@@ -5,6 +5,8 @@ author: [BigBadHenz, Skepter]
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
+  bhome:
+    description: The vote home command.
   lottery:
     description: The main command.
     aliases: [l]
