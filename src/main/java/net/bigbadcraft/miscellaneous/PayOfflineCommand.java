@@ -33,12 +33,16 @@ public class PayOfflineCommand implements CommandExecutor {
 						
 						File file = new File(essentials, "/userdata/" + name +".yml");
 						if (file.exists()) {
-							BigBadCraft.economy.depositPlayer(name, amount);
-							BigBadCraft.economy.withdrawPlayer(p.getName(), amount);
-							p.sendMessage(GREEN + "Successfully made an offline payment of $" + amount + " to " + name + ".");
-							Bukkit.dispatchCommand(p, "mail send " + name + " I've made an offline payment of $" 
-									+ amount + " to you."); 
-							p.sendMessage(GREEN + "Successfully notified " + name + " via mail.");
+							if (BigBadCraft.economy.getBalance(p.getName()) >= amount) {
+								BigBadCraft.economy.depositPlayer(name, amount);
+								BigBadCraft.economy.withdrawPlayer(p.getName(), amount);
+								p.sendMessage(GREEN + "Successfully made an offline payment of $" + amount + " to " + name + ".");
+								Bukkit.dispatchCommand(p, "mail send " + name + " I've made an offline payment of $" 
+										+ amount + " to you."); 
+								p.sendMessage(GREEN + "Successfully notified " + name + " via mail.");
+							} else {
+								p.sendMessage(RED + "You do not have enough money.");
+							}
 						} else {
 							p.sendMessage(RED + name + " userdata cannot be found, cannot pay user.");
 						}
