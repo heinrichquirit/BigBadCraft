@@ -56,6 +56,7 @@ public class LotteryCommand implements CommandExecutor {
 						Bukkit.getScheduler().runTaskTimer(plugin, new BroadcastTask(plugin), 20, 20 * 60 * 5);
 					}
 				}
+				
 				lm.buyTicket(player);
 				player.sendMessage(G + "The current jackpot is: " + Y + "$" + lm.getPot());
 				player.sendMessage(G + "You have purchased " + Y + "1" + G + " ticket." 

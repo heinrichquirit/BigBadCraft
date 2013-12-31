@@ -20,18 +20,16 @@ public class LotteryManager {
 	public void buyTicket(Player player) {
 		BigBadCraft.economy.withdrawPlayer(player.getName(), 100);
 		lotteryTickets.put(player.getName(),
-				!lotteryTickets.containsKey(
-						player.getName()) ? 1 : lotteryTickets.get(player.getName()) + 1);
+				!contains(player) ? 1 : getTicket(player) + 1);
 		this.potAmount = this.potAmount + 100;
 	}
 	
 	public void buyTicket(Player player, int amount) {
-		int total = amount * 100;
-		BigBadCraft.economy.withdrawPlayer(player.getName(), total);
+		int totalCost = amount * 100;
+		BigBadCraft.economy.withdrawPlayer(player.getName(), totalCost);
 		lotteryTickets.put(player.getName(),
-				!lotteryTickets.containsKey(
-						player.getName()) ? amount : lotteryTickets.get(player.getName()) + amount);
-		this.potAmount = this.potAmount + total;
+				!contains(player) ? amount : getTicket(player) + amount);
+		this.potAmount = this.potAmount + totalCost;
 	}
 	
 	public int getTicket(Player player) {

@@ -144,7 +144,7 @@ public class TicketManager {
     }
 
     public String helpMenu() {
-        return  BLUE + " -/ticket" + WHITE + " - Displays a list of commands.\n" +
+        return  BLUE + "-/ticket" + WHITE + " - Displays a list of commands.\n" +
                 BLUE + "-/ticket readfile <player>" + WHITE + " - Displays logged info from file.\n" +
                 BLUE + "-/ticket list" + WHITE + " - Displays a list of open tickets.\n" +
                 BLUE + "-/ticket view <player>" + WHITE + " - View player's helpop tickets.\n" +

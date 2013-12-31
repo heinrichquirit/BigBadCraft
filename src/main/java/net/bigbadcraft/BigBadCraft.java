@@ -5,7 +5,6 @@ import java.util.List;
 
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
-import main.java.net.bigbadcraft.lottery.LotteryCommand;
 import main.java.net.bigbadcraft.lottery.LotteryManager;
 import main.java.net.bigbadcraft.miscellaneous.BannedCommandsListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
@@ -101,7 +100,7 @@ public class BigBadCraft extends JavaPlugin {
         initNameThatMob();
         initWarns();
         initRide();
-        initLottery();
+        //initLottery();
         //initVoteHomes();
         
         PluginManager pm = Bukkit.getPluginManager();
@@ -184,11 +183,12 @@ public class BigBadCraft extends JavaPlugin {
         getCommand("namemob").setExecutor(new NameMobCommand(this));
     }
     
+    /*
     private void initLottery() {
     	lotteryMang = new LotteryManager();
     	getCommand("lottery").setExecutor(new LotteryCommand(this));
     }
-    
+    */
     /*
     private void initVoteHomes() {
     	

@@ -77,7 +77,6 @@ public class VoteListener implements Listener {
 	}
 	
 	private void logVote(PrefixType type, String name, String service) {
-		System.out.println(type.getName() + name + " has voted @ " + service);
 		Bukkit.getLogger().log(Level.INFO, type.getName() + name + " has voted @ " + service);
 	}
 	
