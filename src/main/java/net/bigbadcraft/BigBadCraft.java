@@ -7,10 +7,11 @@ import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
 import main.java.net.bigbadcraft.lottery.LotteryCommand;
 import main.java.net.bigbadcraft.lottery.LotteryManager;
+import main.java.net.bigbadcraft.miscellaneous.BannedCommandsListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
 import main.java.net.bigbadcraft.miscellaneous.ItemIDCommand;
 import main.java.net.bigbadcraft.miscellaneous.PayOfflineCommand;
-import main.java.net.bigbadcraft.miscellaneous.PreciousStonesListener;
+import main.java.net.bigbadcraft.miscellaneous.VoteCommand;
 import main.java.net.bigbadcraft.miscellaneous.VoteListener;
 import main.java.net.bigbadcraft.miscellaneous.ZombieReinforcementsListener;
 import main.java.net.bigbadcraft.namethatmob.command.NameMobCommand;
@@ -83,11 +84,9 @@ public class BigBadCraft extends JavaPlugin {
     public static Economy economy = null;
     public static Permission permission = null;
     
-    /* For later use
     // Temporary Homes global variable
     public File voteHomes;
     public List<String> voteHomesList;
-    */
     
     @Override
     public void onEnable() {
@@ -139,13 +138,14 @@ public class BigBadCraft extends JavaPlugin {
         pm.registerEvents(new ZombieReinforcementsListener(), this);
         // Registers VoteListener
         pm.registerEvents(new VoteListener(this), this);
-        // Registers PreciousStones listener
-        pm.registerEvents(new PreciousStonesListener(), this);
+        // Registers BannedCommmandsListener
+        pm.registerEvents(new BannedCommandsListener(), this);
     }
     
     private void registerCommands() {
     	getCommand("opay").setExecutor(new PayOfflineCommand());
     	getCommand("id").setExecutor(new ItemIDCommand());
+    	getCommand("vote").setExecutor(new VoteCommand());
     }
 
     private void initTicketSystem() {

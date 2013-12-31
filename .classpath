@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/WorldGuard.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/Votifier.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/PreciousStones.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heinrich/Desktop/dependencies/HeroChat.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

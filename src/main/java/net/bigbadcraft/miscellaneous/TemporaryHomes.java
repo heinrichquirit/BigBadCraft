@@ -1,4 +1,3 @@
-/*
 package main.java.net.bigbadcraft.miscellaneous;
 
 import java.io.BufferedWriter;
@@ -151,4 +150,3 @@ public class TemporaryHomes implements CommandExecutor{
 	}
 	
 }
-*/

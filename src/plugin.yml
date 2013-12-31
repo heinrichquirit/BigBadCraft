@@ -5,6 +5,8 @@ author: [BigBadHenz, Skepter]
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
+  vote:
+    description: The command to view vote links.
   bhome:
     description: The vote home command.
   lottery:
