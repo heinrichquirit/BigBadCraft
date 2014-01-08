@@ -163,7 +163,7 @@ public class JukeboxListener implements Listener {
 		}
 	}
 	
-	public ItemStack getDiscItem(Disc disc) {
+	private ItemStack getDiscItem(Disc disc) {
         switch(Disc.getId(disc)) {
         case 1: return new ItemStack(Material.GOLD_RECORD, 1);
         case 2: return new ItemStack(Material.GREEN_RECORD, 1);
@@ -181,13 +181,13 @@ public class JukeboxListener implements Listener {
         }
 }
 
-	public void play(Player player, Jukebox jukebox, Material material) {
+	private void play(Player player, Jukebox jukebox, Material material) {
 		if (BigBadCraft.economy.getBalance(player.getName()) >= plugin.costPerDisc) {
 			jukebox.setPlaying(material);
 		}
 	}
 
-	public void withdraw(Player player, Jukebox box) {
+	private void withdraw(Player player, Jukebox box) {
 		if (BigBadCraft.economy.getBalance(player.getName()) >= plugin.costPerDisc) {
 			BigBadCraft.economy.withdrawPlayer(player.getName(), plugin.costPerDisc);
         	player.sendMessage(BigBadCraft.PREFIX + "Now playing " + ChatColor.RED + Disc.getEnumName(box.getPlaying()) + ChatColor.WHITE + ". $" + plugin.costPerDisc + " has been deducted.");
