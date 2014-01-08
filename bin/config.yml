@@ -19,9 +19,9 @@ ticket-list:
 
 reminder:
   # Set this to true to enable ticket reminders.
-  enable: false
-  # Interval is set to 10min (600sec) by default.
-  interval: 600
+  enable: true
+  # Interval is set to 5 minutes by default.
+  interval: 5
 
 namethatmob:
   # The words you want to blacklist
@@ -35,17 +35,12 @@ namethatmob:
   - vagina
   
   # The amount of letters you want limited in name tag
-  character-limit: 16
+  character-limit: 30
   
 currency:
   vault-enable: true
   currency-cost-per-nametag: 2600
+
   
-# Character limit set to 8 by default.
-character-limit: 8
-# Black list words that you don't want users to set.
-blacklisted-words:
-- fuck
-- fagget
-- dick
-- vagina
+jukeboxPlus:
+  costPerDisc: 100

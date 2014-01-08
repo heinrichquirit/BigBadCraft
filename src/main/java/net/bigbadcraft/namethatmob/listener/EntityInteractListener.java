@@ -27,7 +27,7 @@ public class EntityInteractListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEntityEvent event) {
         final Player player = event.getPlayer();
-        if (nameMang.isAnimOrMons(event) && nameMang.contains(player)) {
+        if (nameMang.isAnimOrMons(event.getRightClicked().getType()) && nameMang.contains(player)) {
             LivingEntity entity = (LivingEntity) event.getRightClicked();
             if (nameMang.isNameNull(entity)) entity.setCustomName(" ");
             if (!entity.getCustomName().equals(nameMang.getMobName(player))) {

@@ -9,9 +9,6 @@ commands:
     description: The command to view vote links.
   bhome:
     description: The vote home command.
-  lottery:
-    description: The main command.
-    aliases: [l]
   id:
     description: Item ID command.
     default: op

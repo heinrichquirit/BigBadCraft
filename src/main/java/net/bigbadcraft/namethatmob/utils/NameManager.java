@@ -11,7 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.plugin.Plugin;
 
 /**
@@ -58,8 +57,7 @@ public class NameManager {
         return entity.getCustomName() == null || entity.getCustomName().equals("");
     }
 
-    public boolean isAnimOrMons(PlayerInteractEntityEvent e) {
-        EntityType type = e.getRightClicked().getType();
+    public boolean isAnimOrMons(EntityType type) {
         return monsters.contains(type) || animals.contains(type);
     }
 

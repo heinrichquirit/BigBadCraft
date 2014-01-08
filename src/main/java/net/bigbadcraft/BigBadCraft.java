@@ -5,6 +5,7 @@ import java.util.List;
 
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
 import main.java.net.bigbadcraft.elbacon.BedListener;
+import main.java.net.bigbadcraft.jukeboxplus.JukeboxListener;
 import main.java.net.bigbadcraft.lottery.LotteryManager;
 import main.java.net.bigbadcraft.miscellaneous.BannedCommandsListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
@@ -39,6 +40,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -76,6 +78,10 @@ public class BigBadCraft extends JavaPlugin {
     public FileConfiguration playerConf;
     public FileConfiguration groupConf;
     
+    // JukeboxPlus variables
+    public int costPerDisc;
+    public static final String PREFIX = "[" + ChatColor.RED + "Jukebox+" + ChatColor.WHITE + "] ";
+    
     // Lottery variables
     public LotteryManager lotteryMang;
 
@@ -102,6 +108,7 @@ public class BigBadCraft extends JavaPlugin {
         initRide();
         //initLottery();
         //initVoteHomes();
+        initJukeboxPlus();
         
         PluginManager pm = Bukkit.getPluginManager();
         registerListeners(pm);
@@ -224,6 +231,12 @@ public class BigBadCraft extends JavaPlugin {
         getCommand("ride").setExecutor(new RideCommand());
     }
 
+    private void initJukeboxPlus() {
+    	costPerDisc = getConfig().getInt("jukeboxPlus.costPerDisc");
+    	
+    	getServer().getPluginManager().registerEvents(new JukeboxListener(this), this);
+    }
+    
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
         if (economyProvider != null) {
