@@ -62,6 +62,7 @@ public class VoteLogger implements Listener, CommandExecutor {
 		
 		String name = event.getVote().getUsername();
 		
+		/* Add their votes */
 		if (!plugin.votesConf.contains(name)) {
 			reloadVotesConf();
 			plugin.votesConf.set(name, 1);
