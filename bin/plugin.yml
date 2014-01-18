@@ -5,6 +5,9 @@ author: [BigBadHenz, Skepter]
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
+  votelogger:
+    description: The main command.
+    aliases: [vl, vlogger]
   vote:
     description: The command to view vote links.
   bhome:

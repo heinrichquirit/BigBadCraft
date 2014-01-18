@@ -41,6 +41,6 @@ currency:
   vault-enable: true
   currency-cost-per-nametag: 2600
 
-  
-jukeboxPlus:
-  costPerDisc: 100
+voteLogger:
+  enableLogger: true
+  topVotes: 5
