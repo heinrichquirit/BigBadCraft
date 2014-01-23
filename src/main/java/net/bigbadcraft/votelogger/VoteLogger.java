@@ -48,7 +48,7 @@ public class VoteLogger implements Listener, CommandExecutor {
 		/* Just to register their name and votes to 0 */
 		String name = event.getPlayer().getName();
 		
-		if (!votes.containsKey(name)) {
+		if (!plugin.votesConf.contains(name)) {
 			reloadVotesConf();
 			plugin.votesConf.set(name, 0);
 			saveVotesConf();
@@ -100,7 +100,7 @@ public class VoteLogger implements Listener, CommandExecutor {
 						if (plugin.votesConf.contains(name)) {
 							player.sendMessage(PREFIX + T + " " + name + "'s votes for " + getCurrentMonth() + " is: " + plugin.votesConf.getInt(name));
 						} else {
-							player.sendMessage(PREFIX + T + " " + name + " has not votes.");
+							player.sendMessage(PREFIX + T + " " + name + " has no votes.");
 						}
 						
 					}
@@ -111,7 +111,7 @@ public class VoteLogger implements Listener, CommandExecutor {
 		return true;
 	}
 	
-	private void reloadVotesConf() {
+	public void reloadVotesConf() {
 		if (plugin.votesFile == null) {
 			plugin.votesFile = new File(plugin.getDataFolder(), "votes" + getCurrentMonth().substring(0, 3) + ".yml");
 		}
@@ -170,7 +170,11 @@ public class VoteLogger implements Listener, CommandExecutor {
 	}
 	
 	private void displayTopVotes(final Player player) {
-
+		
+		/* We need to clear the maps and re-update them again for new votes */
+		if (!votes.isEmpty()) votes.clear();
+		if (!sortedVotes.isEmpty()) sortedVotes.clear();
+		
 		for (String pathName : plugin.votesConf.getKeys(true)) {
 			if (!votes.containsKey(pathName)) {
 				votes.put(pathName, plugin.votesConf.getInt(pathName));
@@ -186,7 +190,7 @@ public class VoteLogger implements Listener, CommandExecutor {
 	
 		reloadVotesConf();
 		
-		player.sendMessage(PREFIX + T + " Ordering top votes for " + getCurrentMonth() + ".");
+		player.sendMessage(PREFIX + T + " Ordering top votes for " + getCurrentMonth() + "..");
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new BukkitRunnable() {
 			int position = 1;
 			@Override

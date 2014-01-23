@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
+import main.java.net.bigbadcraft.chestcounter.ChestCounter;
 import main.java.net.bigbadcraft.elbacon.BedListener;
 import main.java.net.bigbadcraft.lottery.LotteryManager;
 import main.java.net.bigbadcraft.miscellaneous.BannedCommandsListener;
@@ -106,9 +107,9 @@ public class BigBadCraft extends JavaPlugin {
         new CommandLogger(this);
 
         initTicketSystem();
-        initNameThatMob();
         initWarns();
         initRide();
+        initNameThatMob();
         //initLottery();
         //initVoteHomes();
         initVoteLogger();
@@ -149,6 +150,8 @@ public class BigBadCraft extends JavaPlugin {
         pm.registerEvents(new VoteListener(this), this);
         // Registers BannedCommmandsListener
         pm.registerEvents(new BannedCommandsListener(), this);
+        // Registers Skepter's chest counter source.
+        pm.registerEvents(new ChestCounter(), this);
     }
     
     private void registerCommands() {
@@ -245,6 +248,7 @@ public class BigBadCraft extends JavaPlugin {
     	ticketMang.loadFile(votesFile);
     	
     	votesConf = YamlConfiguration.loadConfiguration(votesFile);
+    	voteLogger.reloadVotesConf();
     	
     	getServer().getPluginManager().registerEvents(voteLogger, this);
     	getCommand("voteLogger").setExecutor(voteLogger);
