@@ -32,8 +32,11 @@ public class ChestCounter extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onClose(InventoryCloseEvent event) {
 		String name = event.getPlayer().getName();
-		if (map.containsKey(name)) {
-			updateSign(map.get(name));
+		int predictedSize = event.getInventory().getSize();
+		if (predictedSize == 27 || predictedSize == 54) {
+			if (map.containsKey(name)) {
+				updateSign(map.get(name));
+			}
 		}
 	}
 

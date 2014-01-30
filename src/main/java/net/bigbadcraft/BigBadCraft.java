@@ -9,8 +9,11 @@ import main.java.net.bigbadcraft.elbacon.BedListener;
 import main.java.net.bigbadcraft.lottery.LotteryManager;
 import main.java.net.bigbadcraft.miscellaneous.BannedCommandsListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
+import main.java.net.bigbadcraft.miscellaneous.GlobalGroupCommand;
+import main.java.net.bigbadcraft.miscellaneous.GlobalPermissionsCommand;
 import main.java.net.bigbadcraft.miscellaneous.ItemIDCommand;
 import main.java.net.bigbadcraft.miscellaneous.PayOfflineCommand;
+import main.java.net.bigbadcraft.miscellaneous.TitleCommand;
 import main.java.net.bigbadcraft.miscellaneous.VoteCommand;
 import main.java.net.bigbadcraft.miscellaneous.VoteListener;
 import main.java.net.bigbadcraft.miscellaneous.ZombieReinforcementsListener;
@@ -37,6 +40,7 @@ import main.java.net.bigbadcraft.utils.Utilities;
 import main.java.net.bigbadcraft.votelogger.VoteLogger;
 import main.java.net.bigbadcraft.warns.WarnsCommand;
 import main.java.net.bigbadcraft.warns.WarnsManager;
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
@@ -64,9 +68,6 @@ public class BigBadCraft extends JavaPlugin {
     public List<String> badWords;
     public boolean vaultEnabled;
 
-    // AnimalProtection Variables
-    public int protPrice;
-
     // Certain Plugin Managers
     public TicketManager ticketMang;
     public NameManager nameMang;
@@ -85,6 +86,7 @@ public class BigBadCraft extends JavaPlugin {
     // Dependencies
     public static Economy economy = null;
     public static Permission permission = null;
+    public static Chat chat = null;
     
     // Temporary Homes global variable
     public File voteHomes;
@@ -96,6 +98,10 @@ public class BigBadCraft extends JavaPlugin {
     public FileConfiguration votesConf;
     public boolean enableLogging;
     public int topVotes;
+    
+    // TitleCommand variables
+    public File essDataFile;
+    public FileConfiguration essDataConf;
     
     @Override
     public void onEnable() {
@@ -113,6 +119,7 @@ public class BigBadCraft extends JavaPlugin {
         //initLottery();
         //initVoteHomes();
         initVoteLogger();
+        initTitleCommand();
         
         PluginManager pm = Bukkit.getPluginManager();
         registerListeners(pm);
@@ -120,6 +127,7 @@ public class BigBadCraft extends JavaPlugin {
 
         setupEconomy();
         setupPermissions();
+        setupChat();
     }
 
     @Override
@@ -158,6 +166,8 @@ public class BigBadCraft extends JavaPlugin {
     	getCommand("opay").setExecutor(new PayOfflineCommand());
     	getCommand("id").setExecutor(new ItemIDCommand());
     	getCommand("vote").setExecutor(new VoteCommand());
+    	getCommand("globalperm").setExecutor(new GlobalPermissionsCommand());
+    	getCommand("globalgroup").setExecutor(new GlobalGroupCommand());
     }
 
     private void initTicketSystem() {
@@ -253,6 +263,10 @@ public class BigBadCraft extends JavaPlugin {
     	getServer().getPluginManager().registerEvents(voteLogger, this);
     	getCommand("voteLogger").setExecutor(voteLogger);
     }
+    
+    private void initTitleCommand() {
+    	getCommand("title").setExecutor(new TitleCommand());
+    }
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
@@ -270,4 +284,12 @@ public class BigBadCraft extends JavaPlugin {
         return (permission != null);
     }
     
+    private boolean setupChat() {
+        RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+        if (chatProvider != null) {
+            chat = chatProvider.getProvider();
+        }
+
+        return (chat != null);
+    }
 }

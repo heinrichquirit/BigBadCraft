@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII" standalone="no"?>
 <jardesc>
-    <jar path="/Users/user/Desktop/server/plugins/BigBadCraft.jar"/>
+    <jar path="/Users/user/Desktop/Bukkit Plugins/BigBadCraft.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/BigBadCraft/out.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>

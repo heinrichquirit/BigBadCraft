@@ -1,10 +1,16 @@
 name: BigBadCraft
 main: main.java.net.bigbadcraft.BigBadCraft
-version: 2.0
+version: 2.1.0
 author: [BigBadHenz, Skepter]
 website: www.bigbadcraft.net
 softdepend: [Vault]
 commands:
+  globalgroup:
+    description: The global grouping command.
+  globalperm:
+    description: The global permissions command.
+  title:
+    description: The main command.
   votelogger:
     description: The main command.
     aliases: [vl, vlogger]
