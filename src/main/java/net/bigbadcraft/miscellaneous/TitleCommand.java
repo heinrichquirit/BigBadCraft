@@ -2,7 +2,9 @@ package main.java.net.bigbadcraft.miscellaneous;
 
 import main.java.net.bigbadcraft.BigBadCraft;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -62,7 +64,9 @@ public class TitleCommand implements CommandExecutor {
 	}
 	
 	private void setPrefix(Player player, String prefix) {
-		BigBadCraft.chat.setPlayerPrefix(player, W + "[" + prefix + W + "] " + getGroupColor(player));
+		for (World worlds : Bukkit.getServer().getWorlds()) {
+			BigBadCraft.chat.setPlayerPrefix(worlds.getName(), player.getName(), W + "[" + prefix + W + "] " + getGroupColor(player));
+		}
 	}
 	
 	private void clearPrefix(Player player) {

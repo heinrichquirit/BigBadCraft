@@ -4,12 +4,10 @@ import java.io.File;
 import java.util.List;
 
 import main.java.net.bigbadcraft.buyhead.BuyHeadListener;
-import main.java.net.bigbadcraft.chestcounter.ChestCounter;
 import main.java.net.bigbadcraft.elbacon.BedListener;
 import main.java.net.bigbadcraft.lottery.LotteryManager;
 import main.java.net.bigbadcraft.miscellaneous.BannedCommandsListener;
 import main.java.net.bigbadcraft.miscellaneous.FireworkOnJoinListener;
-import main.java.net.bigbadcraft.miscellaneous.GlobalGroupCommand;
 import main.java.net.bigbadcraft.miscellaneous.GlobalPermissionsCommand;
 import main.java.net.bigbadcraft.miscellaneous.ItemIDCommand;
 import main.java.net.bigbadcraft.miscellaneous.PayOfflineCommand;
@@ -158,8 +156,6 @@ public class BigBadCraft extends JavaPlugin {
         pm.registerEvents(new VoteListener(this), this);
         // Registers BannedCommmandsListener
         pm.registerEvents(new BannedCommandsListener(), this);
-        // Registers Skepter's chest counter source.
-        pm.registerEvents(new ChestCounter(), this);
     }
     
     private void registerCommands() {
@@ -167,7 +163,6 @@ public class BigBadCraft extends JavaPlugin {
     	getCommand("id").setExecutor(new ItemIDCommand());
     	getCommand("vote").setExecutor(new VoteCommand());
     	getCommand("globalperm").setExecutor(new GlobalPermissionsCommand());
-    	getCommand("globalgroup").setExecutor(new GlobalGroupCommand());
     }
 
     private void initTicketSystem() {
